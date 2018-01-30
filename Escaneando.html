@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escaneando exámenes</title>
+  <link href="stylesheets/icon.css" rel="stylesheet">
+  <link href="stylesheets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <script src="javascripts/jquery-2.1.1.min.js"></script>
+  <script src="javascripts/materialize.min.js"></script>
+  <script src="javascripts/init.js"></script>
+  <script src="javascripts/socket.io.min.js"></script>
+
+<!--  <link href="Escaneando%20ex%C3%A1menes_files/icon.css" rel="stylesheet">-->
+  <script>
+    var exam_id = '16702';
+    var course_id = '1791';
+    var max_pages = '7';
+    var qrCode = 'fahGn87F63K5n5KnbIIh899G';
+    var studentsJSON = {};
+    
+      studentsJSON["201233289"] = {name:"Fernando Emmanuel Campana Rojas",cedula:'0918234154',id:'41414'};
+    
+      studentsJSON["201206458"] = {name:"Leonardo David Eras Delgado",cedula:'0929846970',id:'2171'};
+    
+      studentsJSON["201024544"] = {name:"Gabriel Andres Falcones Paredes",cedula:'0926239443',id:'11883'};
+    
+      studentsJSON["200905099"] = {name:"Bryan Oswaldo Garces Murillo",cedula:'0930836549',id:'14395'};
+    
+      studentsJSON["201013430"] = {name:"Gabriela Alejandra Paredes Torres",cedula:'0923656599',id:'35199'};
+    
+    $(document).ready(function(){
+       // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+       $('.modal').modal();
+    });
+
+  </script>
+<script src="javascripts/assignment.js"></script>
+<style type="text/css">
+</style>
+</head>
+
+<body>
+  
+
+  <nav class="light-blue lighten-1 nav-extended">
+    <div class="nav-wrapper container">
+      <a href="" class="brand-logo">SARA</a>
+      <ul class="right">
+        <li><a href="http://200.126.23.221:3000/">Home</a></li>
+        <li><a href="">Scan</a></li>
+        <li><a class="waves-effect waves-light  modal-trigger" href="#qr_code">QR code</a></li>
+        <!-- Dropdown Trigger -->
+        <li>
+          <a class="dropdown-button" href="#!" data-activates="dropdown1">
+            <i class="material-icons left">perm_identity</i>
+            Maya Herrera,Ricardo David
+          </a><ul id="dropdown1" class="dropdown-content">
+
+    <li><a href="http://200.126.23.221:3000/logout/canvas">Cerrar Sesion</a></li>
+  </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Modal Structure -->
+  <div id="qr_code" class="modal modal-trigger qr_div">
+    <div class="">
+      <div class="row">
+        <div class="col s6 " style="text-align:center">
+          <img src="Escaneando%20ex%C3%A1menes_files/fahGn87F63K5n5KnbIIh899G.png" class="responsive-img qr_image " alt="qr code">
+        </div>
+        <div class="col s6" style="margin-top:10%">
+          <h4>SARA App QR</h4>
+          <p style="font-size:18px;">
+            Escanee el siguiente código QR con la aplicación movil SARA, para poder
+            vincular su teléfono con esta sesión.
+          </p>
+          <p>
+            Nota: Recuerde que su dispositivo y PC deben estar conectados a la misma red.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer" style="background-color:transparent">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Done</a>
+    </div>
+  </div>
+
+    <div class="section no-pad-bot container section_body" id="index-banner" style="min-height: 80vh;">
+      <div class="row">
+        <table class="col s8 striped">
+            <thead>
+              <tr>
+                  <th>
+                    <!--<input type="checkbox" onclick="toogleAll()">-->
+                      <input class="filled-in" id="filled-in-box" onclick="toogleAll()" type="checkbox">
+                      <label for="filled-in-box"></label>
+                  </th>
+                  <th>#</th>
+                  <th>Estudiante</th>
+                  <th>Identificación</th>
+                  <th>Páginas reconocidas</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr id="mat201233289">
+                  <td class="check">
+                    <input name="41414 201233289" value="public/pdf/16702_201233289.pdf" class="filled-in" id="41414 201233289" type="checkbox">
+                    <label for="41414 201233289"></label></td>
+                  <td>1</td>
+                  <td>Fernando Emmanuel Campana Rojas</td>
+                  <td>201233289 - 0918234154</td>
+                  <td>
+                    <span class="pages">
+                      
+                      <a id="1" target="_blank" class="waves-effect waves-light btn small-button white black-text">1</a>
+                      
+                      <a id="2" target="_blank" class="waves-effect waves-light btn small-button white black-text">2</a>
+                      
+                      <a id="3" target="_blank" class="waves-effect waves-light btn small-button white black-text">3</a>
+                      
+                      <a id="4" target="_blank" class="waves-effect waves-light btn small-button white black-text">4</a>
+                      
+                      <a id="5" target="_blank" class="waves-effect waves-light btn small-button white black-text">5</a>
+                      
+                      <a id="6" target="_blank" class="waves-effect waves-light btn small-button white black-text">6</a>
+                      
+                      <a id="7" target="_blank" class="waves-effect waves-light btn small-button white black-text">7</a>
+                      
+                    </span>
+                    <a id="pdf_201233289" href="http://200.126.23.221:3000/course/1791/assignment/16702/student/201233289/pdf" target="_blank" class="waves-effect waves-light btn small-button blue pdfBtn">PDF</a>
+                  </td>
+                  <td>
+                    <div id="loader_41414"></div>
+                  </td>
+                </tr>
+              
+                <tr id="mat201206458">
+                  <td class="check">
+                    <input name="2171 201206458" value="public/pdf/16702_201206458.pdf" class="filled-in" id="2171 201206458" type="checkbox">
+                    <label for="2171 201206458"></label></td>
+                  <td>2</td>
+                  <td>Leonardo David Eras Delgado</td>
+                  <td>201206458 - 0929846970</td>
+                  <td>
+                    <span class="pages">
+                      
+                      <a id="1" target="_blank" class="waves-effect waves-light btn small-button white black-text">1</a>
+                      
+                      <a id="2" target="_blank" class="waves-effect waves-light btn small-button green white-text">2</a>
+                      
+                      <a id="3" target="_blank" class="waves-effect waves-light btn small-button white black-text">3</a>
+                      
+                      <a id="4" target="_blank" class="waves-effect waves-light btn small-button white black-text">4</a>
+                      
+                      <a id="5" target="_blank" class="waves-effect waves-light btn small-button white black-text">5</a>
+                      
+                      <a id="6" target="_blank" class="waves-effect waves-light btn small-button white black-text">6</a>
+                      
+                      <a id="7" target="_blank" class="waves-effect waves-light btn small-button white black-text">7</a>
+                      
+                    </span>
+                    <a id="pdf_201206458" href="http://200.126.23.221:3000/course/1791/assignment/16702/student/201206458/pdf" target="_blank" class="waves-effect waves-light btn small-button blue pdfBtn">PDF</a>
+                  </td>
+                  <td>
+                    <div id="loader_2171"></div>
+                  </td>
+                </tr>
+              
+                <tr id="mat201024544">
+                  <td class="check">
+                    <input name="11883 201024544" value="public/pdf/16702_201024544.pdf" class="filled-in" id="11883 201024544" type="checkbox">
+                    <label for="11883 201024544"></label></td>
+                  <td>3</td>
+                  <td>Gabriel Andres Falcones Paredes</td>
+                  <td>201024544 - 0926239443</td>
+                  <td>
+                    <span class="pages">
+                      
+                      <a id="1" target="_blank" class="waves-effect waves-light btn small-button white black-text">1</a>
+                      
+                      <a id="2" target="_blank" class="waves-effect waves-light btn small-button white black-text">2</a>
+                      
+                      <a id="3" target="_blank" class="waves-effect waves-light btn small-button white black-text">3</a>
+                      
+                      <a id="4" target="_blank" class="waves-effect waves-light btn small-button green white-text">4</a>
+                      
+                      <a id="5" target="_blank" class="waves-effect waves-light btn small-button white black-text">5</a>
+                      
+                      <a id="6" target="_blank" class="waves-effect waves-light btn small-button white black-text">6</a>
+                      
+                      <a id="7" target="_blank" class="waves-effect waves-light btn small-button green white-text">7</a>
+                      
+                    </span>
+                    <a id="pdf_201024544" href="http://200.126.23.221:3000/course/1791/assignment/16702/student/201024544/pdf" target="_blank" class="waves-effect waves-light btn small-button blue pdfBtn">PDF</a>
+                  </td>
+                  <td>
+                    <div id="loader_11883"></div>
+                  </td>
+                </tr>
+              
+                <tr id="mat200905099">
+                  <td class="check">
+                    <input name="14395 200905099" value="public/pdf/16702_200905099.pdf" class="filled-in" id="14395 200905099" type="checkbox">
+                    <label for="14395 200905099"></label></td>
+                  <td>4</td>
+                  <td>Bryan Oswaldo Garces Murillo</td>
+                  <td>200905099 - 0930836549</td>
+                  <td>
+                    <span class="pages">
+                      
+                      <a id="1" target="_blank" class="waves-effect waves-light btn small-button green white-text">1</a>
+                      
+                      <a id="2" target="_blank" class="waves-effect waves-light btn small-button white black-text">2</a>
+                      
+                      <a id="3" target="_blank" class="waves-effect waves-light btn small-button white black-text">3</a>
+                      
+                      <a id="4" target="_blank" class="waves-effect waves-light btn small-button white black-text">4</a>
+                      
+                      <a id="5" target="_blank" class="waves-effect waves-light btn small-button white black-text">5</a>
+                      
+                      <a id="6" target="_blank" class="waves-effect waves-light btn small-button white black-text">6</a>
+                      
+                      <a id="7" target="_blank" class="waves-effect waves-light btn small-button white black-text">7</a>
+                      
+                    </span>
+                    <a id="pdf_200905099" href="http://200.126.23.221:3000/course/1791/assignment/16702/student/200905099/pdf" target="_blank" class="waves-effect waves-light btn small-button blue pdfBtn">PDF</a>
+                  </td>
+                  <td>
+                    <div id="loader_14395"></div>
+                  </td>
+                </tr>
+              
+                <tr id="mat201013430">
+                  <td class="check">
+                    <input name="35199 201013430" value="public/pdf/16702_201013430.pdf" class="filled-in" id="35199 201013430" type="checkbox">
+                    <label for="35199 201013430"></label></td>
+                  <td>5</td>
+                  <td>Gabriela Alejandra Paredes Torres</td>
+                  <td>201013430 - 0923656599</td>
+                  <td>
+                    <span class="pages">
+                      
+                      <a id="1" target="_blank" class="waves-effect waves-light btn small-button white black-text">1</a>
+                      
+                      <a id="2" target="_blank" class="waves-effect waves-light btn small-button white black-text">2</a>
+                      
+                      <a id="3" target="_blank" class="waves-effect waves-light btn small-button white black-text">3</a>
+                      
+                      <a id="4" target="_blank" class="waves-effect waves-light btn small-button white black-text">4</a>
+                      
+                      <a id="5" target="_blank" class="waves-effect waves-light btn small-button green white-text">5</a>
+                      
+                      <a id="6" target="_blank" class="waves-effect waves-light btn small-button white black-text">6</a>
+                      
+                      <a id="7" target="_blank" class="waves-effect waves-light btn small-button green white-text">7</a>
+                      
+                    </span>
+                    <a id="pdf_201013430" href="http://200.126.23.221:3000/course/1791/assignment/16702/student/201013430/pdf" target="_blank" class="waves-effect waves-light btn small-button blue pdfBtn">PDF</a>
+                  </td>
+                  <td>
+                    <div id="loader_35199"></div>
+                  </td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+        <div class="thumbnail lastImage col s4 center ">
+          
+
+
+            <img src="images/download.png" class="responsive-img exam_image" alt="Imagen">
+            <div class="caption">
+            <p id="student_id_label">0923656599</p>
+            <p id="student_predicted_label"></p>
+            <p id="student_name_label">Gabriela Alejandra Paredes Torres</p>
+            <p id="student_page_label">Página: 5</p>
+            </div>
+            <input id="startDetectionBtn" class="btn btn-primary" value="Iniciar" onclick="startDetection(true)" disabled="disabled" type="button">
+            <input id="stopDetectionBtn" class="btn btn-default" value="Detener" onclick="stopDetection(true)" disabled="disabled" type="button">
+            <br>
+            <br>
+            <input id="sendPDFBtn" class="btn btn-info" value="Enviar PDF Seleccionado(s)" onclick="sendPDFs()" type="button">
+            <br><br>
+            <img id="streamImage" src="images/camera_google.png" class="responsive-img stream_image" alt="Imagen">
+              <br><br>
+            <input id="focusBtn" class="btn btn-primary" value="Focus" onclick="focusEvent()" disabled="disabled" type="button">
+        </div>
+
+      </div>
+    </div>
+
+  <footer class="page-footer light-blue">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12 center-align">
+          <h5 class="white-text">CTI</h5>
+          <p class="grey-text text-lighten-4">Es un centro el cual 
+desarrolla proyectos reales que combinan tecnologías emergentes, 
+participación multidisciplinaria y las diferentes dimensiones humanas de
+ la tecnología.</p>
+        </div>
+        <div class="col l3 s12 center-align">
+          <h5 class="white-text">Contacto</h5>
+          <ul>
+            <li><a class="white-text">Km. 30.5 Vía Perimetral, ESPOL</a></li>
+            <li><a class="white-text">yandrade@cti.espol.edu.ec</a></li>
+            <li><a class="white-text">042269777</a></li>
+          </ul>
+        </div>
+        <div class="col l2 s12 center-align">
+          <h5 class="white-text center-a">Sitio Web</h5>
+          <ul>
+            <li><a class="white-text" href="http://www.cti.espol.edu.ec/">http://www.cti.espol.edu.ec/</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <div>CTI ESPOL © 2017 Todos los derechos reservados.Centro de Tecnologías de Información</div>
+      </div>
+    </div>
+  </footer>
+
+
+
+<div class="hiddendiv common"></div></body></html>
