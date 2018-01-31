@@ -36,13 +36,37 @@
     });
 
   </script>
-<script src="javascripts/assignment.js"></script>
+<!--<script src="javascripts/assignment.js"></script>-->
+    <script src="javascripts/FullWidthTabs/js/cbpFWTabs.js"></script>
+    <link href="javascripts/FullWidthTabs/css/component.css" rel="stylesheet">
+    <link rel="stylesheet" type="javascripts/FullWidthTabs/text/css" href="css/demo.css" />
+    <script src="javascripts/pruebas.js"></script>
+    
 <style type="text/css">
+    .icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
 </style>
 </head>
 
 <body>
-  
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<symbol id="icon-playlist_add_check" viewBox="0 0 24 24">
+<title>playlist_add_check</title>
+<path d="M21.516 11.484l1.5 1.5-6.984 7.031-4.547-4.5 1.5-1.5 3.047 3zM2.016 15.984v-1.969h7.969v1.969h-7.969zM14.016 6v2.016h-12v-2.016h12zM14.016 9.984v2.016h-12v-2.016h12z"></path>
+</symbol>
+<symbol id="icon-mobile" viewBox="0 0 32 32">
+<title>mobile</title>
+<path d="M23 0h-14c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h14c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 1.5h8v1h-8v-1zM16 30c-1.105 0-2-0.895-2-2s0.895-2 2-2 2 0.895 2 2-0.895 2-2 2zM24 24h-16v-20h16v20z"></path>
+</symbol>
+</defs>
+</svg>  
 
   <nav class="light-blue lighten-1 nav-extended">
     <div class="nav-wrapper container">
@@ -90,8 +114,45 @@
     </div>
   </div>
 
-    <div class="section no-pad-bot container section_body" id="index-banner" style="min-height: 80vh;">
+    <div class="section no-pad-bot section_body" id="index-banner" style="min-height: 80vh;">
       <div class="row">
+          
+        <div class="row thumbnail lastImage col s4 center ">
+            <div id="pestanas" class="pestanas">
+                <div class="nav">
+                    <ul>
+                        <li><a href="#section-1" ><svg class="icon icon-mobile" ><use xlink:href="#icon-mobile"></use></svg>
+                            <span>Enfocar</span></a></li>
+                        <li><a href="#section-2"><svg class="icon icon-playlist_add_check"><use xlink:href="#icon-playlist_add_check"></use></svg><span>Escanear</span></a></li>
+                    </ul>
+                </div>
+                <div class="content">
+                    <section id="section-1">
+                        <div class="enfocando mediabox">
+                            <img id="streamImage" src="images/camera_google.png" class="responsive-img stream_image" alt="Imagen">
+                              <br><br>
+                            <input id="focusBtn" class="btn btn-primary" value="Focus" onclick="focusEvent()"  type="button">
+                        </div>
+                    </section>
+                    <section id="section-2">
+                        <div class="escaneando mediabox">
+                            <img src="images/download.png" class="responsive-img exam_image" alt="Imagen">
+                            <div class="caption">
+                            <p id="student_id_label">0923656599</p>
+                            <p id="student_predicted_label"></p>
+                            <p id="student_name_label">Gabriela Alejandra Paredes Torres</p>
+                            <p id="student_page_label">Página: 5</p>
+                            </div>
+                            <input id="startDetectionBtn" class="btn btn-primary" value="Iniciar" onclick="startDetection(true)" disabled="disabled" type="button">
+                            <input id="stopDetectionBtn" class="btn btn-default" value="Detener" onclick="stopDetection(true)" disabled="disabled" type="button">
+                            <br><br>
+                            <input id="sendPDFBtn" class="btn btn-info" value="Enviar PDF(s)" onclick="sendPDFs()" type="button">
+                        </div>
+                    </section>
+                </div>
+            </div>
+            
+        </div>  
         <table class="col s8 striped">
             <thead>
               <tr>
@@ -270,29 +331,7 @@
               
             </tbody>
           </table>
-
-        <div class="thumbnail lastImage col s4 center ">
-          
-
-
-            <img src="images/download.png" class="responsive-img exam_image" alt="Imagen">
-            <div class="caption">
-            <p id="student_id_label">0923656599</p>
-            <p id="student_predicted_label"></p>
-            <p id="student_name_label">Gabriela Alejandra Paredes Torres</p>
-            <p id="student_page_label">Página: 5</p>
-            </div>
-            <input id="startDetectionBtn" class="btn btn-primary" value="Iniciar" onclick="startDetection(true)" disabled="disabled" type="button">
-            <input id="stopDetectionBtn" class="btn btn-default" value="Detener" onclick="stopDetection(true)" disabled="disabled" type="button">
-            <br>
-            <br>
-            <input id="sendPDFBtn" class="btn btn-info" value="Enviar PDF Seleccionado(s)" onclick="sendPDFs()" type="button">
-            <br><br>
-            <img id="streamImage" src="images/camera_google.png" class="responsive-img stream_image" alt="Imagen">
-              <br><br>
-            <input id="focusBtn" class="btn btn-primary" value="Focus" onclick="focusEvent()" disabled="disabled" type="button">
-        </div>
-
+        
       </div>
     </div>
 
@@ -328,7 +367,9 @@ participación multidisciplinaria y las diferentes dimensiones humanas de
       </div>
     </div>
   </footer>
-
+<script>
+    new CBPFWTabs( document.getElementById( 'pestanas' ) );
+</script>
 
 
 <div class="hiddendiv common"></div></body></html>
